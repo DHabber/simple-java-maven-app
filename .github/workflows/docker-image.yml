@@ -13,8 +13,9 @@ jobs:
     environment:
       name: ${{ github.ref_name }}
       url: ${{ steps.deploy.outputs.vm_url }}
-
     steps:
+    - id: deploy
+      name: Deploy
     - uses: actions/checkout@v3
     - name: Build the Docker image
       run: docker build -t helloworld . --file Dockerfile --tag ghcr.io/dhabber/helloworld:$(date +%s) --tag ghcr.io/dhabber/helloworld:latest
@@ -22,4 +23,11 @@ jobs:
       run: echo ${{ secrets.GIT_TOKEN }} | docker login ghcr.io -u ${{ secrets.DOCKER_USERNAME }} --password-stdin
     - name: Push the Docker Image
       run: docker push ghcr.io/dhabber/helloworld:latest  
+    - uses: bitovi/github-actions-deploy-docker-to-ec2@0.4.2
+      with:
+        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY }}
+        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws_default_region: us-east-1
+        app_port: 80
+      
     
