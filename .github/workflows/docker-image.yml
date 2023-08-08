@@ -22,7 +22,7 @@ jobs:
       run: docker push ghcr.io/dhabber/helloworld:latest
       
     - name: Deploy
-      uses: appleboy/ssh-action@master
+      uses: appleboy/ssh-action@v1.0.0
       with:
         host: ${{ secrets.EC2_HOST }}
         username: ${{ secrets.EC2_USER }}
