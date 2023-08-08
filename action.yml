@@ -1,0 +1,16 @@
+# action.yml
+name: 'Hello World'
+description: 'Says hello to the world'
+inputs:
+   build-number:
+     description: 'build number/tag, TODO: autoincrement it somehow'
+     required: true
+     default: '1'
+ runs:
+   using: 'docker'
+   image: 'Dockerfile'
+   args:
+     - ${{ inputs.build-number }}
+ tags:
+   - ${{ inputs.build-number }}
+ image: $ {{ secrets.Docker_USERNAME }}/hello-world:${{ inputs.build-number }}

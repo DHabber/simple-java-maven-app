@@ -17,6 +17,8 @@ RUN mvn package
 
 FROM openjdk:11-jre-slim
 
+LABEL org.opencontainers.image.source=https://github.com/dhabber/simple-java-maven-app
+
 WORKDIR /app
 
 COPY --from=build /app/target/my-app-1.0-SNAPSHOT.jar /app/my-app.jar
