@@ -32,5 +32,3 @@ jobs:
           sudo docker rm helloworld || true
           sudo docker pull ghcr.io/dhabber/helloworld:latest
           sudo docker run -d --name helloworld ghcr.io/dhabber/helloworld:latest
-      
-    
