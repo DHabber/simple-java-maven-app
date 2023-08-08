@@ -27,7 +27,7 @@ jobs:
         host: ${{ secrets.EC2_HOST }}
         username: ${{ secrets.EC2_USER }}
         key: ${{ secrets.EC2_PRIVATE_KEY }}
-        scripts: |
+        script: |
           sudo docker kill helloworld || true
           sudo docker rm helloworld || true
           sudo docker pull ghcr.io/dhabber/helloworld:latest
